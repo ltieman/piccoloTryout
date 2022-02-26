@@ -1,11 +1,8 @@
 from piccolo.table import Table
 from piccolo.columns import Serial, Varchar, ForeignKey, Integer, Timestamp, Interval, Numeric, UUID, JSON, Boolean
-from piccolo_api.crud.endpoints import PiccoloCRUD
 from fastapi import FastAPI
-from piccolo_api.fastapi.endpoints import FastAPIWrapper
 import uvicorn
 from fastapi.routing import Mount
-from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin
 
 class Manager(Table):
