@@ -3,28 +3,29 @@ from piccolo.columns import Serial, Varchar, ForeignKey, Integer, Timestamp, Int
 from fastapi import FastAPI
 import uvicorn
 from fastapi.routing import Mount
+from piccolo_api.crud.endpoints import PiccoloCRUD
 from piccolo_admin.endpoints import create_admin
 
 class Manager(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     name = Varchar()
 
 
 class Band(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     name = Varchar()
     manager = ForeignKey(references=Manager)
     popularity = Integer()
 
 
 class Venue(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     name = Varchar()
     capacity = Integer()
 
 
 class Concert(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     band_1 = ForeignKey(references=Band)
     band_2 = ForeignKey(references=Band)
     venue = ForeignKey(references=Venue)
@@ -33,18 +34,18 @@ class Concert(Table):
 
 
 class Ticket(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     concert = ForeignKey(references=Concert)
     price = Numeric()
 
 class DiscountCode(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     code = UUID()
     active = Boolean()
 
 
 class RecordingStudio(Table):
-    id = Serial()
+    id = Serial(primary_key=True)
     name = Varchar()
     facilities = JSON()
 
@@ -54,7 +55,7 @@ app = FastAPI(
         Mount(
             "/",
             create_admin(
-                tables=[Manager,Ticket,Band,Concert,Venue, RecordingStudio,DiscountCode],
+                tables=[Manager,Ticket,Band,Concert,Venue,RecordingStudio,DiscountCode],
                 site_name="Piccolo PlayGround Admin",
                 # Required when running under HTTPS:
                 # allowed_hosts=['my_site.com']
