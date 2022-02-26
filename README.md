@@ -1,4 +1,4 @@
-#Piccolo Tryout
+Piccolo Tryout
 
 A super simple piccolo admin app based off the playground example
 
